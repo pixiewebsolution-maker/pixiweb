@@ -23,28 +23,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Magnetic button effect for nav links
-  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    gsap.to(e.currentTarget, {
-      x: x * 0.3,
-      y: y * 0.3,
-      duration: 0.3,
-      ease: 'power2.out',
-    });
-  };
-
-  const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    gsap.to(e.currentTarget, {
-      x: 0,
-      y: 0,
-      duration: 0.6,
-      ease: 'elastic.out(1, 0.3)',
-    });
-  };
-
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const el = document.querySelector(href);
@@ -59,12 +37,12 @@ export default function Navbar() {
       <div className="container flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center gap-3" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-          <Image src="/logo.png" alt="Pixie Webs" width={44} height={44} className="rounded-lg" style={{ filter: 'invert(1)', mixBlendMode: 'screen' }} />
+          <Image src="/pixie-logo.png" alt="Pixie Webs" width={56} height={56} className="rounded-lg" style={{ mixBlendMode: 'multiply' }} />
           <span style={{
             fontFamily: 'var(--font-sans)',
             fontWeight: 700,
             fontSize: '1.15rem',
-            background: 'linear-gradient(135deg, #A855F7, #F59E0B)',
+            background: 'var(--color-primary)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
@@ -80,8 +58,6 @@ export default function Navbar() {
               key={l.label}
               href={l.href}
               className="nav-link"
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
               onClick={(e) => scrollTo(e, l.href)}
             >
               {l.label}

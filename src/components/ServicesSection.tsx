@@ -3,6 +3,8 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Image from 'next/image';
+import InteractiveGrid from './InteractiveGrid';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,7 +17,7 @@ const services = [
     ),
     title: 'Web Design',
     description: 'Award-winning designs that captivate, convert, and create lasting impressions. Every pixel is intentional.',
-    tag: 'UX Research · Visual Design',
+    tag: 'UX Research',
   },
   {
     icon: (
@@ -25,7 +27,7 @@ const services = [
     ),
     title: 'Development',
     description: 'Blazing-fast, scalable code that performs flawlessly. From Next.js to full-stack solutions.',
-    tag: 'React · Next.js · Node.js',
+    tag: 'React · Next.js',
   },
   {
     icon: (
@@ -35,7 +37,7 @@ const services = [
     ),
     title: 'Branding',
     description: 'Strategic brand identities that resonate, differentiate, and build enduring market presence.',
-    tag: 'Identity · Strategy · Voice',
+    tag: 'Identity · Strategy',
   },
   {
     icon: (
@@ -45,18 +47,16 @@ const services = [
     ),
     title: 'UI/UX Design',
     description: 'Human-centered experiences that delight users at every touchpoint with intuitive interaction design.',
-    tag: 'Wireframes · Prototypes · Testing',
+    tag: 'Wireframes · Testing',
   },
 ];
 
 export default function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const cards = cardsRef.current?.querySelectorAll('.service-card');
-
     // Headline
     gsap.fromTo(
       headRef.current,
@@ -72,46 +72,24 @@ export default function ServicesSection() {
     );
 
     // Cards stagger
+    const cards = gridRef.current?.querySelectorAll('.bento-service-card');
     if (cards) {
       gsap.fromTo(
         cards,
-        { y: 80, opacity: 0, scale: 0.95 },
+        { y: 30, opacity: 0, scale: 0.98 },
         {
           y: 0, opacity: 1, scale: 1,
-          duration: 0.9,
-          stagger: 0.12,
-          ease: 'power3.out',
+          duration: 0.3,
+          stagger: 0.03,
+          ease: 'power2.out',
           scrollTrigger: {
-            trigger: cardsRef.current,
-            start: 'top 80%',
+            trigger: gridRef.current,
+            start: 'top 100%',
             toggleActions: 'play none none reverse',
           },
         }
       );
     }
-
-    // Individual card hover 3D tilt
-    const cardEls = cardsRef.current?.querySelectorAll<HTMLElement>('.service-card');
-    cardEls?.forEach((card) => {
-      const handleMove = (e: MouseEvent) => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 16;
-        const y = ((e.clientY - rect.top) / rect.height - 0.5) * -16;
-        gsap.to(card, {
-          rotateX: y, rotateY: x,
-          transformPerspective: 600,
-          duration: 0.4, ease: 'power2.out',
-        });
-      };
-      const handleLeave = () => {
-        gsap.to(card, {
-          rotateX: 0, rotateY: 0,
-          duration: 0.7, ease: 'elastic.out(1, 0.3)',
-        });
-      };
-      card.addEventListener('mousemove', handleMove);
-      card.addEventListener('mouseleave', handleLeave);
-    });
   }, []);
 
   return (
@@ -124,11 +102,11 @@ export default function ServicesSection() {
         transform: 'translate(-50%, -50%)',
         width: '800px',
         height: '800px',
-        background: 'radial-gradient(ellipse, rgba(124,58,237,0.06) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse, rgba(0,0,0,0.03) 0%, transparent 70%)',
         pointerEvents: 'none',
       }} />
 
-      <div className="container">
+      <div className="container relative z-10">
         {/* Header */}
         <div ref={headRef} style={{ textAlign: 'center', marginBottom: '80px' }}>
           <div className="section-label" style={{ margin: '0 auto 24px' }}>What We Do</div>
@@ -145,73 +123,101 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        {/* Cards */}
-        <div
-          ref={cardsRef}
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '24px',
-          }}
-        >
-          {services.map((s, i) => (
-            <div 
-              key={i} 
-              className="service-card" 
-              data-cursor-hover
-              style={{
-                flex: '1 1 calc(33.333% - 16px)',
-                minWidth: '280px',
-                maxWidth: '400px'
-              }}
-            >
-              <div className="icon-wrap" style={{ color: 'var(--color-primary-light)' }}>
-                {s.icon}
+        {/* Bento Grid Layout */}
+        <div ref={gridRef} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          {/* Card 1 & 2: Left Column (Stacked) */}
+          <div className="flex flex-col gap-6">
+            
+            {/* Branding (Orange Style) */}
+            <div className="bento-service-card bg-[#FF6701] rounded-[48px] p-10 shadow-sm flex-1 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group">
+              <div className="flex justify-between items-start mb-6">
+                <div className="w-14 h-14 bg-black rounded-full flex items-center justify-center text-2xl text-[#FF6701] transition-transform duration-300 group-hover:scale-110">
+                  {services[2].icon}
+                </div>
+                <div className="bg-black/10 px-4 py-2 rounded-full text-black text-xs font-bold tracking-wider uppercase">
+                  {services[2].tag}
+                </div>
               </div>
-              <h3 style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: '1.35rem',
-                fontWeight: 700,
-                marginBottom: '12px',
-                letterSpacing: '-0.02em',
-              }}>
-                {s.title}
-              </h3>
-              <p style={{
-                color: 'var(--color-text-muted)',
-                fontSize: '0.95rem',
-                lineHeight: 1.7,
-                marginBottom: '20px',
-              }}>
-                {s.description}
-              </p>
-              <div style={{
-                display: 'inline-block',
-                padding: '5px 12px',
-                borderRadius: '100px',
-                fontSize: '0.72rem',
-                fontWeight: 600,
-                letterSpacing: '0.08em',
-                color: 'var(--color-accent)',
-                background: 'rgba(245,158,11,0.1)',
-                border: '1px solid rgba(245,158,11,0.2)',
-              }}>
-                {s.tag}
+              <div>
+                <h3 className="text-3xl font-bold font-sans text-black mb-3 tracking-tight">
+                  {services[2].title}
+                </h3>
+                <p className="text-neutral-800 text-[0.95rem] leading-relaxed max-w-[260px]">
+                  {services[2].description}
+                </p>
               </div>
-
-              {/* Corner decoration */}
-              <div style={{
-                position: 'absolute',
-                top: '20px', right: '20px',
-                width: '40px', height: '40px',
-                borderTop: '1.5px solid rgba(168,85,247,0.2)',
-                borderRight: '1.5px solid rgba(168,85,247,0.2)',
-                borderRadius: '0 8px 0 0',
-              }} />
             </div>
-          ))}
+
+            {/* UI/UX Design (Black Style) */}
+            <div className="bento-service-card bg-black rounded-[40px] p-8 lg:p-10 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 min-h-[140px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group">
+              <div className="flex flex-col order-2 sm:order-1">
+                <div className="bg-white/10 w-fit px-3 py-1 rounded-full text-white/70 text-[0.65rem] font-bold tracking-wider uppercase mb-2">
+                  {services[3].tag}
+                </div>
+                <h3 className="text-2xl lg:text-3xl font-bold font-sans text-white tracking-tight">
+                  {services[3].title}
+                </h3>
+              </div>
+              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center text-2xl text-white transform transition-transform duration-500 group-hover:scale-110 group-hover:bg-[#FF6701] group-hover:text-black order-1 sm:order-2 shrink-0">
+                {services[3].icon}
+              </div>
+            </div>
+
+          </div>
+
+          {/* Card 3: Development (Middle Tall - Satin Grey Style - Was White) */}
+          <div className="bento-service-card bg-[#1C1C1C] rounded-[48px] p-10 lg:p-12 shadow-sm flex flex-col justify-between min-h-[400px] lg:min-h-[480px] transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group border border-white/5 overflow-hidden relative">
+            <InteractiveGrid />
+            <div className="relative z-10 flex flex-col justify-between h-full">
+              <div className="flex justify-between items-start mb-8">
+                <div className="w-16 h-16 bg-[#FF6701] rounded-full flex items-center justify-center text-2xl text-black transition-transform duration-300 group-hover:scale-110">
+                  {services[1].icon}
+                </div>
+                <div className="bg-white/5 px-4 py-2 rounded-full text-white/60 text-xs font-bold tracking-wider uppercase">
+                  {services[1].tag}
+                </div>
+              </div>
+              <div>
+                <h3 className="text-4xl font-bold font-sans text-white mb-4 tracking-tight">
+                  {services[1].title}
+                </h3>
+                <p className="text-neutral-400 text-[1rem] leading-relaxed">
+                  {services[1].description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 4: Web Design (Right Tall - White Style - Was Blue) */}
+          <div className="bento-service-card relative rounded-[48px] overflow-hidden min-h-[400px] lg:min-h-[480px] bg-white flex flex-col justify-between p-4 shadow-sm group border border-neutral-100">
+            {/* Background Image / Overlay */}
+            <div className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105">
+              <div className="absolute inset-0 bg-white/40 mix-blend-overlay z-10" />
+              <Image src="/projects/dashboard-2.png" alt="Web Design" fill className="object-cover opacity-80" />
+            </div>
+            {/* Top Tag & Icon */}
+            <div className="relative z-10 flex justify-between items-center pt-6 px-6">
+              <div className="w-14 h-14 bg-[#1C1C1C] rounded-full flex items-center justify-center text-2xl text-white shadow-lg">
+                {services[0].icon}
+              </div>
+              <div className="bg-[#1C1C1C]/10 backdrop-blur-md px-4 py-2 rounded-full text-black text-xs font-bold tracking-wider uppercase">
+                {services[0].tag}
+              </div>
+            </div>
+            {/* Content Box */}
+            <div className="relative z-10 bg-[#1C1C1C] rounded-[32px] p-8 pb-10 w-full shadow-xl transform transition-transform duration-500 group-hover:-translate-y-2 border border-white/5">
+              <h3 className="text-3xl font-bold font-sans text-white mb-3 tracking-tight">
+                {services[0].title}
+              </h3>
+              <p className="text-neutral-400 text-sm leading-relaxed">
+                {services[0].description}
+              </p>
+            </div>
+          </div>
+
         </div>
+
       </div>
     </section>
   );

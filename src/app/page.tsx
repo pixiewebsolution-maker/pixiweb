@@ -24,6 +24,9 @@ export default function Home() {
     // Initialize Lenis smooth scroll after preloader
     const initLenis = async () => {
       const Lenis = (await import('lenis')).default;
+      const gsap = (await import('gsap')).default;
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+      
       const lenis = new Lenis({
         duration: 1.4,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -31,13 +34,20 @@ export default function Home() {
         smoothWheel: true,
       });
 
-      const raf = (time: number) => {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      };
-      requestAnimationFrame(raf);
+      // Synchronize Lenis with ScrollTrigger
+      lenis.on('scroll', ScrollTrigger.update);
 
-      return () => lenis.destroy();
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+
+      gsap.ticker.lagSmoothing(0);
+
+      // Clean up
+      return () => {
+        lenis.destroy();
+        gsap.ticker.remove(lenis.raf);
+      };
     };
 
     if (loaded) {

@@ -17,7 +17,7 @@ const socials = [
 const footerLinks = {
   Services: ['Web Design', 'Development', 'Branding', 'UI/UX Design', 'SEO & Growth'],
   Company: ['About Us', 'Our Work', 'Case Studies', 'Blog', 'Careers'],
-  Contact: ['hello@pixiewebs.com', '+91 98765 43210', 'Kochi, Kerala, India'],
+  Contact: ['hello@pixiewebs.com', '+91 88777 7807', 'Kochi, Kerala, India'],
 };
 
 export default function Footer() {
@@ -53,15 +53,12 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-              <Image src="/logo.png" alt="Pixie Webs" width={40} height={40} />
+              <Image src="/pixie-logo.png" alt="Pixie Webs" width={64} height={64} style={{ mixBlendMode: 'multiply' }} />
               <span style={{
                 fontFamily: 'var(--font-sans)',
                 fontWeight: 700,
                 fontSize: '1.1rem',
-                background: 'linear-gradient(135deg, #A855F7, #F59E0B)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
+                color: 'var(--color-text)',
               }}>
                 Pixie Webs
               </span>
@@ -94,10 +91,10 @@ export default function Footer() {
                   }}
                   onMouseEnter={(e) => {
                     const el = e.currentTarget;
-                    el.style.borderColor = 'rgba(168,85,247,0.6)';
-                    el.style.color = '#A855F7';
-                    el.style.background = 'rgba(168,85,247,0.1)';
-                    el.style.boxShadow = '0 0 20px rgba(168,85,247,0.2)';
+                    el.style.borderColor = 'rgba(255, 103, 1, 0.6)';
+                    el.style.color = '#FF6701';
+                    el.style.background = 'rgba(255, 103, 1, 0.1)';
+                    el.style.boxShadow = '0 0 20px rgba(255, 103, 1, 0.2)';
                     gsap.to(el, { y: -4, duration: 0.3, ease: 'back.out(1.7)' });
                   }}
                   onMouseLeave={(e) => {
@@ -156,7 +153,7 @@ export default function Footer() {
         {/* Divider */}
         <div style={{
           height: '1px',
-          background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.3), transparent)',
+          background: 'var(--color-border)',
           marginBottom: '32px',
         }} />
 
@@ -167,7 +164,7 @@ export default function Footer() {
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '16px',
-          color: 'var(--color-text-dim)',
+          color: 'var(--color-text-muted)',
           fontSize: '0.82rem',
         }}>
           <span>© 2025 Pixie Webs. All rights reserved.</span>

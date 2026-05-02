@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   description:
     "Award-winning digital agency crafting immersive web experiences, stunning UI/UX, and high-performance digital solutions that convert visitors into customers.",
   keywords: "digital agency, web design, web development, UI/UX, branding, Pixie Webs",
+  icons: {
+    icon: '/pixie-logo.png?v=2',
+    shortcut: '/pixie-logo.png?v=2',
+    apple: '/pixie-logo.png?v=2',
+  },
   openGraph: {
     title: "Pixie Webs — We Build Experiences",
     description:
@@ -22,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/pixie-logo.png?v=2" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>

@@ -3,6 +3,8 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Image from 'next/image';
+import InteractiveGrid from './InteractiveGrid';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,43 +13,38 @@ const steps = [
     number: '01',
     title: 'Discover',
     description: 'We dive deep into your goals, audience, and market. Research-driven strategy that sets the foundation for everything.',
-    color: '#7C3AED',
+    color: '#000000',
     icon: '🔍',
   },
   {
     number: '02',
     title: 'Design',
     description: 'Wireframes evolve into stunning, pixel-perfect interfaces. Every interaction carefully crafted for maximum impact.',
-    color: '#A855F7',
+    color: '#000000',
     icon: '✦',
   },
   {
     number: '03',
     title: 'Develop',
     description: 'Clean, scalable code brings designs to life. Performance-first approach with the latest web technologies.',
-    color: '#C084FC',
+    color: '#000000',
     icon: '</> ',
   },
   {
     number: '04',
     title: 'Launch',
     description: 'Seamless deployment, rigorous testing, and ongoing optimization to ensure peak performance post-launch.',
-    color: '#F59E0B',
+    color: '#FF6701',
     icon: '🚀',
   },
 ];
 
 export default function ProcessSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const pinRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
-  const progressLineRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
     // Headline reveal
     gsap.fromTo(
       headRef.current,
@@ -62,36 +59,20 @@ export default function ProcessSection() {
       }
     );
 
-    // Cards reveal
-    const cards = track.querySelectorAll('.process-card');
-    gsap.fromTo(
-      cards,
-      { y: 60, opacity: 0, scale: 0.95 },
-      {
-        y: 0, opacity: 1, scale: 1,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: track,
-          start: 'top 75%',
-          toggleActions: 'play none none reverse',
-        },
-      }
-    );
-
-    // Progress line animation
-    if (progressLineRef.current) {
+    // Bento Cards reveal
+    const cards = gridRef.current?.querySelectorAll('.bento-process-card');
+    if (cards) {
       gsap.fromTo(
-        progressLineRef.current,
-        { scaleX: 0, transformOrigin: 'left' },
+        cards,
+        { y: 30, opacity: 0, scale: 0.98 },
         {
-          scaleX: 1,
-          duration: 1.5,
-          ease: 'power3.out',
+          y: 0, opacity: 1, scale: 1,
+          duration: 0.3,
+          stagger: 0.03,
+          ease: 'power2.out',
           scrollTrigger: {
-            trigger: track,
-            start: 'top 75%',
+            trigger: gridRef.current,
+            start: 'top 100%',
             toggleActions: 'play none none reverse',
           },
         }
@@ -101,16 +82,15 @@ export default function ProcessSection() {
 
   return (
     <section ref={sectionRef} className="section-pad" id="process" style={{ background: 'var(--color-surface)' }}>
-      {/* BG Pattern */}
       <div style={{
-        position: 'absolute', inset: 0, opacity: 0.3,
-        backgroundImage: 'linear-gradient(rgba(138,92,246,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(138,92,246,0.03) 1px, transparent 1px)',
-        backgroundSize: '60px 60px',
+        position: 'absolute', inset: 0, opacity: 0.1,
+        backgroundImage: 'linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)',
+        backgroundSize: '80px 80px',
       }} />
 
       <div className="container">
         {/* Header */}
-        <div ref={headRef} style={{ textAlign: 'center', marginBottom: '80px' }}>
+        <div ref={headRef} style={{ textAlign: 'center', marginBottom: '80px', position: 'relative', zIndex: 10 }}>
           <div className="section-label" style={{ margin: '0 auto 24px' }}>How We Work</div>
           <h2 className="display-md" style={{ marginBottom: '20px' }}>
             Our{' '}
@@ -125,148 +105,103 @@ export default function ProcessSection() {
           </p>
         </div>
 
-        {/* Steps */}
-        <div ref={pinRef} style={{ position: 'relative' }}>
-          {/* Progress line */}
-          <div style={{
-            position: 'relative',
-            marginBottom: '60px',
-            height: '2px',
-            background: 'rgba(255,255,255,0.06)',
-            borderRadius: '100px',
-            overflow: 'hidden',
-          }}>
-            <div
-              ref={progressLineRef}
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))',
-                borderRadius: '100px',
-              }}
-            />
-            {/* Step dots on line */}
-            {steps.map((_, i) => (
-              <div key={i} style={{
-                position: 'absolute',
-                top: '50%',
-                left: `${(i / (steps.length - 1)) * 100}%`,
-                transform: 'translate(-50%, -50%)',
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
-                background: steps[i].color,
-                border: '2px solid var(--color-surface)',
-                boxShadow: `0 0 16px ${steps[i].color}80`,
-                zIndex: 2,
-              }} />
-            ))}
-          </div>
-
-          {/* Cards track */}
-          <div
-            ref={trackRef}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-              gap: '24px',
-            }}
-          >
-            {steps.map((step, i) => (
-              <div
-                key={i}
-                className="process-card"
-                style={{
-                  padding: '40px 32px',
-                  borderRadius: '24px',
-                  border: `1px solid ${step.color}25`,
-                  background: `linear-gradient(135deg, ${step.color}08 0%, transparent 100%)`,
-                  backdropFilter: 'blur(10px)',
-                  transition: 'transform 0.4s ease, box-shadow 0.4s ease',
-                  cursor: 'default',
-                  position: 'relative',
-                  overflow: 'hidden',
-                }}
-                onMouseEnter={(e) => {
-                  gsap.to(e.currentTarget, {
-                    y: -8, boxShadow: `0 20px 60px ${step.color}30`,
-                    duration: 0.4, ease: 'power2.out',
-                  });
-                }}
-                onMouseLeave={(e) => {
-                  gsap.to(e.currentTarget, {
-                    y: 0, boxShadow: 'none',
-                    duration: 0.6, ease: 'elastic.out(1, 0.3)',
-                  });
-                }}
-              >
-                {/* Number */}
-                <div style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '5.5rem',
-                  fontWeight: 900,
-                  lineHeight: 1,
-                  color: 'transparent',
-                  WebkitTextStroke: `1px ${step.color}30`,
-                  position: 'absolute',
-                  top: '16px',
-                  right: '20px',
-                }}>
-                  {step.number}
-                </div>
-
-                {/* Icon */}
-                <div style={{
-                  fontSize: '2rem',
-                  marginBottom: '20px',
-                  display: 'inline-block',
-                  background: `${step.color}15`,
-                  border: `1px solid ${step.color}30`,
-                  borderRadius: '14px',
-                  width: '56px', height: '56px',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}>
-                  {step.icon}
-                </div>
-
-                <h3 style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '1.4rem',
-                  fontWeight: 700,
-                  marginBottom: '12px',
-                  color: step.color,
-                }}>
-                  {step.title}
-                </h3>
-                <p style={{
-                  color: 'var(--color-text-muted)',
-                  fontSize: '0.92rem',
-                  lineHeight: 1.7,
-                }}>
-                  {step.description}
-                </p>
-
-                {/* Arrow connector (not on last) */}
-                {i < steps.length - 1 && (
-                  <div style={{
-                    position: 'absolute',
-                    bottom: '-12px',
-                    right: '-12px',
-                    width: '24px', height: '24px',
-                    borderRadius: '50%',
-                    background: `linear-gradient(135deg, ${step.color}, ${steps[i+1].color})`,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: '0.7rem', color: 'white', fontWeight: 700,
-                    zIndex: 2,
-                  }}>
-                    →
-                  </div>
-                )}
+        {/* Bento Grid Layout */}
+        <div ref={gridRef} className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
+          
+          {/* Card 1: Left Tall (White Style - Was Blue Image) */}
+          <div className="bento-process-card relative rounded-[48px] overflow-hidden min-h-[400px] lg:min-h-[480px] bg-white flex flex-col justify-between p-4 shadow-sm group">
+            {/* Background Image / Overlay */}
+            <div className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105">
+              <div className="absolute inset-0 bg-white/40 mix-blend-overlay z-10" />
+              <Image src="/projects/dashboard-1.png" alt="Discover" fill className="object-cover opacity-80" />
+            </div>
+            {/* Top Icon & Number */}
+            <div className="relative z-10 flex justify-between items-start pt-6 px-6">
+              <div className="w-14 h-14 bg-[#1C1C1C] rounded-2xl flex items-center justify-center text-2xl shadow-lg text-white">
+                {steps[0].icon}
               </div>
-            ))}
+              <div className="text-5xl font-bold text-black opacity-80 font-sans tracking-tighter">
+                {steps[0].number}
+              </div>
+            </div>
+            {/* Content Box */}
+            <div className="relative z-10 bg-[#1C1C1C] rounded-[32px] p-8 pb-10 w-full shadow-xl transform transition-transform duration-500 group-hover:-translate-y-2 border border-white/5">
+              <h3 className="text-2xl font-bold font-sans text-white mb-3 tracking-tight">
+                {steps[0].title}
+              </h3>
+              <p className="text-neutral-400 text-sm leading-relaxed">
+                {steps[0].description}
+              </p>
+            </div>
           </div>
+
+          {/* Card 2 & 3: Middle Column (Stacked) */}
+          <div className="flex flex-col gap-6">
+            
+            {/* Develop (Orange Style) */}
+            <div className="bento-process-card bg-[#FF6701] rounded-[48px] p-10 shadow-sm flex-1 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:shadow-xl hover:-translate-y-2">
+              <div className="flex justify-between items-start mb-6">
+                <div className="w-12 h-12 bg-black/5 rounded-2xl flex items-center justify-center text-xl text-black">
+                  {steps[2].icon}
+                </div>
+                <div className="text-5xl font-bold text-black/20 font-sans tracking-tighter">
+                  {steps[2].number}
+                </div>
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold font-sans text-black mb-3 tracking-tight">
+                  {steps[2].title}
+                </h3>
+                <p className="text-neutral-800 text-sm leading-relaxed max-w-[240px]">
+                  {steps[2].description}
+                </p>
+              </div>
+            </div>
+
+            {/* Launch (Black Style) */}
+            <div className="bento-process-card bg-black rounded-[40px] p-8 lg:p-10 shadow-xl flex items-center justify-between min-h-[140px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group">
+              <div className="flex flex-col">
+                <div className="text-white/40 font-bold font-sans text-2xl tracking-tighter mb-1">
+                  {steps[3].number}
+                </div>
+                <h3 className="text-3xl font-bold font-sans text-white tracking-tight">
+                  {steps[3].title}
+                </h3>
+              </div>
+              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center text-2xl text-white transform transition-transform duration-500 group-hover:scale-110 group-hover:bg-[#FF6701] group-hover:text-black">
+                {steps[3].icon}
+              </div>
+            </div>
+
+          </div>
+
+          {/* Card 4: Right Tall (Satin Grey Style) */}
+          <div className="bento-process-card bg-[#1C1C1C] rounded-[48px] p-10 lg:p-12 shadow-sm flex flex-col justify-between min-h-[400px] lg:min-h-[480px] transition-all duration-500 hover:shadow-xl hover:-translate-y-2 border border-white/5 overflow-hidden relative">
+            <InteractiveGrid />
+            <div className="relative z-10 flex flex-col justify-between h-full">
+              <div className="flex justify-between items-start mb-8">
+                <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center text-2xl text-white">
+                  {steps[1].icon}
+                </div>
+                <div className="text-6xl font-bold text-white/10 font-sans tracking-tighter">
+                  {steps[1].number}
+                </div>
+              </div>
+              <div>
+                <h3 className="text-3xl font-bold font-sans text-white mb-4 tracking-tight">
+                  {steps[1].title}
+                </h3>
+                <p className="text-neutral-400 text-[0.95rem] leading-relaxed">
+                  {steps[1].description}
+                </p>
+              </div>
+            </div>
+          </div>
+
         </div>
+
       </div>
     </section>
   );
 }
+

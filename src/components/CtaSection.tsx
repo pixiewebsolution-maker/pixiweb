@@ -51,32 +51,6 @@ export default function CtaSection() {
       });
     }
 
-    // Magnetic buttons
-    [btn1Ref].forEach((ref) => {
-      const btn = ref.current;
-      if (!btn) return;
-      const onMove = (e: MouseEvent) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        gsap.to(btn, { x: x * 0.4, y: y * 0.4, duration: 0.4, ease: 'power2.out' });
-      };
-      const onLeave = () => gsap.to(btn, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.3)' });
-      const onClick = (e: MouseEvent) => {
-        const ripple = document.createElement('span');
-        ripple.className = 'btn-ripple';
-        const rect = btn.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height) * 2.5;
-        ripple.style.width = ripple.style.height = `${size}px`;
-        ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
-        ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
-        btn.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 700);
-      };
-      btn.addEventListener('mousemove', onMove);
-      btn.addEventListener('mouseleave', onLeave);
-      btn.addEventListener('click', onClick);
-    });
   }, []);
 
   return (
@@ -97,25 +71,23 @@ export default function CtaSection() {
           top: '50%', left: '50%',
           transform: 'translate(-50%, -50%)',
           width: '700px', height: '700px',
-          background: 'radial-gradient(circle, rgba(124,58,237,0.2) 0%, rgba(245,158,11,0.08) 50%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(197, 245, 66, 0.2) 0%, rgba(0, 0, 0, 0.05) 50%, transparent 70%)',
           borderRadius: '50%',
           filter: 'blur(40px)',
           pointerEvents: 'none',
         }}
       />
 
-      {/* Grid lines */}
       <div style={{
         position: 'absolute', inset: 0,
-        backgroundImage: 'linear-gradient(rgba(138,92,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(138,92,246,0.04) 1px, transparent 1px)',
+        backgroundImage: 'linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)',
         backgroundSize: '60px 60px',
       }} />
 
-      {/* Floating shapes */}
       <div style={{
         position: 'absolute', top: '20%', left: '5%',
         width: '80px', height: '80px',
-        border: '1px solid rgba(124,58,237,0.2)',
+        border: '1px solid rgba(0,0,0,0.1)',
         borderRadius: '20px',
         transform: 'rotate(25deg)',
         animation: 'float 8s ease-in-out infinite',
@@ -123,7 +95,7 @@ export default function CtaSection() {
       <div style={{
         position: 'absolute', bottom: '20%', right: '8%',
         width: '60px', height: '60px',
-        border: '1px solid rgba(245,158,11,0.2)',
+        border: '1px solid rgba(197, 245, 66, 0.5)',
         borderRadius: '50%',
         animation: 'float-reverse 6s ease-in-out infinite',
       }} />
@@ -163,11 +135,11 @@ export default function CtaSection() {
             <span>✉ hello@pixiewebs.com</span>
           </a>
           <a
-            href="tel:+1234567890"
+            href="tel:+91887777807"
             className="btn-ghost"
             style={{ fontSize: '1.05rem', padding: '17px 40px' }}
           >
-            📞 Book a Call
+            📞 +91 88777 7807
           </a>
         </div>
 

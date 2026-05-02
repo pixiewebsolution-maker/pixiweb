@@ -71,7 +71,7 @@ const cardVariants = {
     y: 0, 
     opacity: 1, 
     scale: 1,
-    transition: { type: "spring", stiffness: 100, damping: 20 }
+    transition: { type: "spring" as const, stiffness: 100, damping: 20 }
   },
 };
 
@@ -84,11 +84,11 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
       style={{
         borderRadius: '20px',
         overflow: 'hidden',
-        border: `1px solid ${project.accent}20`,
+        border: `1px solid ${project.accent}40`,
         transition: 'border-color 0.4s ease',
         position: 'relative',
         aspectRatio: '4/3',
-        backgroundColor: '#120F22'
+        backgroundColor: '#FFFFFF'
       }}
     >
       <div className="absolute inset-0 overflow-hidden">
@@ -132,7 +132,7 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)',
+          background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-end',
@@ -210,12 +210,12 @@ export default function ShowcaseSection() {
     >
       {/* Background Decorative Elements with Parallax */}
       <motion.div 
-        style={{ y, position: 'absolute', top: '10%', left: '-10%', opacity: 0.5, filter: 'blur(80px)', zIndex: 0 }}
-        className="w-[500px] h-[500px] rounded-full bg-purple-900/30"
+        style={{ y, position: 'absolute', top: '10%', left: '-10%', opacity: 0.1, filter: 'blur(80px)', zIndex: 0 }}
+        className="w-[500px] h-[500px] rounded-full bg-black"
       />
       <motion.div 
-        style={{ y: useTransform(scrollYProgress, [0, 1], [-80, 80]), position: 'absolute', bottom: '10%', right: '-5%', opacity: 0.3, filter: 'blur(100px)', zIndex: 0 }}
-        className="w-[600px] h-[600px] rounded-full bg-indigo-900/40"
+        style={{ y: useTransform(scrollYProgress, [0, 1], [-80, 80]), position: 'absolute', bottom: '10%', right: '-5%', opacity: 0.05, filter: 'blur(100px)', zIndex: 0 }}
+        className="w-[600px] h-[600px] rounded-full bg-black"
       />
 
       {/* BG Divider */}
@@ -224,7 +224,7 @@ export default function ShowcaseSection() {
         bottom: 0, left: '50%',
         transform: 'translateX(-50%)',
         width: '100%', height: '1px',
-        background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.4), transparent)',
+        background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.15), transparent)',
         zIndex: 1
       }} />
 

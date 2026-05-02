@@ -89,45 +89,6 @@ export default function HeroSection() {
       },
     });
 
-    // Magnetic CTA button
-    const btn = btnRef.current;
-    if (btn) {
-      const handleMove = (e: MouseEvent) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        gsap.to(btn, {
-          x: x * 0.35, y: y * 0.35,
-          duration: 0.4, ease: 'power2.out',
-        });
-      };
-      const handleLeave = () => {
-        gsap.to(btn, {
-          x: 0, y: 0,
-          duration: 0.8, ease: 'elastic.out(1, 0.3)',
-        });
-      };
-      const handleClick = (e: MouseEvent) => {
-        // Ripple
-        const ripple = document.createElement('span');
-        ripple.className = 'btn-ripple';
-        const rect = btn.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height) * 2;
-        ripple.style.width = ripple.style.height = `${size}px`;
-        ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
-        ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
-        btn.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 700);
-      };
-      btn.addEventListener('mousemove', handleMove);
-      btn.addEventListener('mouseleave', handleLeave);
-      btn.addEventListener('click', handleClick);
-      return () => {
-        btn.removeEventListener('mousemove', handleMove);
-        btn.removeEventListener('mouseleave', handleLeave);
-        btn.removeEventListener('click', handleClick);
-      };
-    }
   }, []);
 
   const scrollToSection = (e: React.MouseEvent, href: string) => {
@@ -148,7 +109,7 @@ export default function HeroSection() {
         className="shape-orb"
         style={{
           width: '600px', height: '600px',
-          background: 'radial-gradient(circle, rgba(124,58,237,0.25) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255, 103, 1, 0.1) 0%, transparent 70%)',
           top: '-100px', right: '-100px',
         }}
       />
@@ -157,7 +118,7 @@ export default function HeroSection() {
         className="shape-orb"
         style={{
           width: '500px', height: '500px',
-          background: 'radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(0, 0, 0, 0.05) 0%, transparent 70%)',
           bottom: '-50px', left: '-100px',
         }}
       />
@@ -166,7 +127,7 @@ export default function HeroSection() {
         className="shape-orb"
         style={{
           width: '400px', height: '400px',
-          background: 'radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255, 103, 1, 0.08) 0%, transparent 70%)',
           top: '40%', left: '60%',
         }}
       />
@@ -202,47 +163,23 @@ export default function HeroSection() {
 
       {/* Main Content */}
       <div className="container relative z-10 text-center">
-        {/* Label */}
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '10px',
-          padding: '8px 20px',
-          background: 'rgba(124, 58, 237, 0.1)',
-          border: '1px solid rgba(124, 58, 237, 0.3)',
-          borderRadius: '100px',
-          fontSize: '0.78rem',
-          fontWeight: 600,
-          letterSpacing: '0.15em',
-          textTransform: 'uppercase',
-          color: 'var(--color-primary-light)',
-          marginBottom: '32px',
-        }}>
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--color-accent)', display: 'inline-block', animation: 'pulse-dot 2s ease-in-out infinite' }} />
-          Digital Excellence Redefined
-        </div>
+
 
         {/* Headline */}
         <div
           ref={headlineRef}
-          aria-label="We don't build websites. We build experiences."
-          style={{ marginBottom: '28px' }}
+          aria-label="We don't build websites. We create experiences."
+          style={{ marginBottom: '32px' }}
         >
-          <h1 className="display-xl" style={{ lineHeight: 1.0 }}>
-            {[
-              { text: "We don't", gradient: false },
-              { text: "build", gradient: false },
-              { text: "websites.", gradient: false },
-            ].map((item, i) => (
-              <span key={i} className="overflow-clip" style={{ display: 'block' }}>
-                <span className="word" style={{ display: 'inline-block' }}>
-                  {item.text}
-                </span>
+          <h1 className="display-xl" style={{ lineHeight: 1.1 }}>
+            <span className="overflow-clip" style={{ display: 'block' }}>
+              <span className="word" style={{ display: 'inline-block' }}>
+                We don&apos;t build websites.
               </span>
-            ))}
+            </span>
             <span className="overflow-clip" style={{ display: 'block' }}>
               <span className="word text-gradient shimmer-text" style={{ display: 'inline-block' }}>
-                We build experiences.
+                We create experiences.
               </span>
             </span>
           </h1>
@@ -263,7 +200,7 @@ export default function HeroSection() {
         </p>
 
         {/* CTAs */}
-        <div ref={ctaRef} style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div ref={ctaRef} style={{ display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '12px' }}>
           <a
             ref={btnRef}
             href="#contact"
@@ -272,11 +209,16 @@ export default function HeroSection() {
             style={{ display: 'inline-flex' }}
           >
             <span>Start Your Project</span>
-            <span style={{ fontSize: '1.1em' }}>→</span>
+            <span style={{ fontSize: '1.2em' }}>→</span>
           </a>
           <a
             href="#work"
             className="btn-ghost"
+            style={{ 
+              background: 'rgba(255,255,255,0.8)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(0,0,0,0.05)'
+            }}
             onClick={(e) => scrollToSection(e, '#work')}
           >
             View Our Work
@@ -288,7 +230,7 @@ export default function HeroSection() {
           ref={scrollHintRef}
           style={{
             position: 'absolute',
-            bottom: '-60px',
+            bottom: '-120px',
             left: '50%',
             transform: 'translateX(-50%)',
             display: 'flex',
@@ -305,7 +247,7 @@ export default function HeroSection() {
           <div style={{
             width: '1.5px',
             height: '40px',
-            background: 'linear-gradient(to bottom, var(--color-primary-light), transparent)',
+            background: 'linear-gradient(to bottom, var(--color-primary), transparent)',
             animation: 'scrollLine 2s ease-in-out infinite',
           }} />
         </div>

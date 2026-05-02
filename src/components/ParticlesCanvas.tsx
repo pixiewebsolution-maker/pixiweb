@@ -32,10 +32,10 @@ export default function ParticlesCanvas() {
     }[] = [];
 
     const colors = [
-      'rgba(124, 58, 237,', // purple
-      'rgba(168, 85, 247,', // violet
-      'rgba(245, 158, 11,', // amber
-      'rgba(139, 92, 246,', // lavender
+      'rgba(0, 0, 0,', // black
+      'rgba(197, 245, 66,', // lime
+      'rgba(50, 50, 50,', // dark gray
+      'rgba(150, 150, 150,', // gray
     ];
 
     for (let i = 0; i < 120; i++) {
@@ -72,7 +72,7 @@ export default function ParticlesCanvas() {
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 100) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(124, 58, 237, ${(1 - dist / 100) * 0.08})`;
+            ctx.strokeStyle = `rgba(0, 0, 0, ${(1 - dist / 100) * 0.08})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
