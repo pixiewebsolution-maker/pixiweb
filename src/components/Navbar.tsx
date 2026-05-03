@@ -34,10 +34,10 @@ export default function Navbar() {
 
   return (
     <nav ref={navRef} className={scrolled ? 'scrolled' : ''}>
-      <div className="container flex items-center justify-between relative min-h-[70px]">
+      <div className="container flex items-center justify-between relative min-h-[50px]">
         {/* Logo */}
         <a href="#" className="z-10" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-          <Image src="/pixie-logo.png" alt="Pixie Webs" width={120} height={40} className="object-contain" style={{ mixBlendMode: 'multiply' }} />
+          <Image src="/pixie-logo.png" alt="Pixie Webs" width={100} height={32} className="object-contain" style={{ mixBlendMode: 'multiply' }} />
         </a>
 
         <div className="hidden md:flex items-center gap-8">
@@ -51,7 +51,7 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
-          <a href="#contact" className="btn-primary" style={{ padding: '12px 24px', fontSize: '0.9rem' }} onClick={(e) => scrollTo(e, '#contact')}>
+          <a href="#contact" className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.85rem' }} onClick={(e) => scrollTo(e, '#contact')}>
             <span>Start a Project</span>
           </a>
         </div>
