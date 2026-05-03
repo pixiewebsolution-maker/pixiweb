@@ -6,7 +6,7 @@
    ============================================ */
 :root {
   /* Colors */
-  --color-bg: #E2E2E4;
+  --color-bg: #B8B8BA;
   --color-bg-2: #FFFFFF;
   --color-surface: #D8D8DA;
   --color-surface-2: #FFFFFF;
@@ -37,7 +37,7 @@
   --font-body: 'Inter', sans-serif;
 
   /* Spacing */
-  --section-pad: clamp(100px, 15vw, 200px);
+  --section-pad: clamp(80px, 12vw, 200px);
 
   /* Transitions */
   --ease-smooth: cubic-bezier(0.23, 1, 0.32, 1);
@@ -143,6 +143,16 @@ body.cursor-hover #cursor-ring {
   opacity: 0.6;
 }
 
+body.cursor-white #cursor-dot {
+  background: #FFFFFF !important;
+  box-shadow: 0 0 15px rgba(255, 103, 1, 0.5) !important;
+}
+
+body.cursor-white #cursor-ring {
+  border-color: #FFFFFF !important;
+  opacity: 0.8 !important;
+}
+
 body.cursor-click #cursor-dot {
   transform: translate(-50%, -50%) scale(0.7);
 }
@@ -168,7 +178,7 @@ body.cursor-click #cursor-dot {
    ============================================ */
 .display-xl {
   font-family: var(--font-serif);
-  font-size: clamp(3rem, 7vw, 8rem);
+  font-size: clamp(2.5rem, 7.5vw, 7rem);
   font-weight: 500;
   line-height: 1.0;
   letter-spacing: -0.02em;
@@ -177,7 +187,7 @@ body.cursor-click #cursor-dot {
 
 .display-lg {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5vw, 6rem);
+  font-size: clamp(2.2rem, 6vw, 6rem);
   font-weight: 500;
   line-height: 1.05;
   letter-spacing: -0.02em;
@@ -186,7 +196,7 @@ body.cursor-click #cursor-dot {
 
 .display-md {
   font-family: var(--font-serif);
-  font-size: clamp(1.8rem, 3.5vw, 4rem);
+  font-size: clamp(1.8rem, 4vw, 4rem);
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.015em;
@@ -195,7 +205,6 @@ body.cursor-click #cursor-dot {
 
 .text-gradient {
   color: var(--color-primary);
-  font-style: italic;
 }
 
 .text-glow {
@@ -282,8 +291,13 @@ section {
 
 .btn-primary:hover {
   transform: scale(1.03);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-  background: var(--color-primary-light);
+  box-shadow: 0 12px 30px var(--color-accent-glow);
+  background: var(--color-accent) !important;
+  color: #000000 !important;
+}
+
+.btn-primary:hover::after {
+  background: #000000;
 }
 
 .btn-ghost {
@@ -306,10 +320,20 @@ section {
 }
 
 .btn-ghost:hover {
-  border-color: var(--color-primary);
-  background: var(--color-primary);
-  color: #FFFFFF !important;
+  border-color: var(--color-accent) !important;
+  background: var(--color-accent) !important;
+  color: #000000 !important;
   transform: scale(1.03);
+  box-shadow: 0 12px 30px var(--color-accent-glow);
+}
+
+/* Specific Shadow for Hero Buttons */
+.hero-btn-shadow {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+.hero-btn-shadow:hover {
+  box-shadow: 0 15px 40px var(--color-accent-glow) !important;
 }
 
 /* Ripple effect */
@@ -521,25 +545,54 @@ section {
    ============================================ */
 nav {
   position: fixed;
-  top: 20px;
+  top: 24px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  padding: 12px 24px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--color-border);
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 100px;
-  transition: all 0.4s var(--ease-smooth);
-  width: 90%;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  width: 92%;
   max-width: 1200px;
+  box-shadow: 
+    inset 0 0 12px rgba(255, 255, 255, 0.25),
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    0 1px 1px rgba(255, 255, 255, 0.4) inset;
+}
+
+nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  padding: 1px;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.5),
+    transparent 50%,
+    rgba(255, 255, 255, 0.2)
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 nav.scrolled {
-  background: rgba(255, 255, 255, 0.9) !important;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-  padding: 10px 24px;
+  box-shadow: 
+    inset 0 0 12px rgba(255, 255, 255, 0.3),
+    0 20px 40px rgba(0,0,0,0.1),
+    0 1px 1px rgba(255, 255, 255, 0.5) inset;
+  padding: 8px 24px;
 }
 
 .nav-link {
@@ -686,8 +739,8 @@ footer .nav-link:hover {
 .container {
   max-width: 1320px;
   margin: 0 auto;
-  padding-left: clamp(24px, 5vw, 80px);
-  padding-right: clamp(24px, 5vw, 80px);
+  padding-left: clamp(20px, 4vw, 80px);
+  padding-right: clamp(20px, 4vw, 80px);
 }
 
 .overflow-clip {

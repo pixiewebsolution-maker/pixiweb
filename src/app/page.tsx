@@ -74,7 +74,7 @@ export default function Home() {
 
       {/* Main content */}
       <main>
-        <HeroSection />
+        <HeroSection isLoaded={loaded} />
         <ServicesSection />
         <ProcessSection />
         <WhyUsSection />

@@ -10,44 +10,32 @@ gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    icon: (
-      <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42" />
-      </svg>
-    ),
+    icon: <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-4c-.83 0-1.5-.67-1.5-1.5S8.67 5 9.5 5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>,
     title: 'Web Design',
     description: 'Award-winning designs that captivate, convert, and create lasting impressions. Every pixel is intentional.',
     tag: 'UX Research',
+    number: '04',
   },
   {
-    icon: (
-      <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
-      </svg>
-    ),
+    icon: <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>,
     title: 'Development',
     description: 'Blazing-fast, scalable code that performs flawlessly. From Next.js to full-stack solutions.',
     tag: 'React · Next.js',
+    number: '02',
   },
   {
-    icon: (
-      <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
-      </svg>
-    ),
+    icon: <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>,
     title: 'Branding',
     description: 'Strategic brand identities that resonate, differentiate, and build enduring market presence.',
     tag: 'Identity · Strategy',
+    number: '01',
   },
   {
-    icon: (
-      <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path d="M7.5 3.75H6A2.25 2.25 0 0 0 3.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0 1 20.25 6v1.5m0 9V18A2.25 2.25 0 0 1 18 20.25h-1.5m-9 0H6A2.25 2.25 0 0 1 3.75 18v-1.5M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-      </svg>
-    ),
+    icon: <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm1.063-17.974L4.026 12.063 12.063 20.1l8.037-8.037-7.037-7.037z"/></svg>,
     title: 'UI/UX Design',
     description: 'Human-centered experiences that delight users at every touchpoint with intuitive interaction design.',
     tag: 'Wireframes · Testing',
+    number: '03',
   },
 ];
 
@@ -130,17 +118,17 @@ export default function ServicesSection() {
           <div className="flex flex-col gap-6">
             
             {/* Branding (Orange Style) */}
-            <div className="bento-service-card bg-[#FF6701] rounded-[48px] p-10 shadow-sm flex-1 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group">
+            <div data-cursor-white className="bento-service-card bg-[#FF6701] rounded-[48px] p-10 shadow-sm flex-1 flex flex-col justify-between min-h-[260px] transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group">
               <div className="flex justify-between items-start mb-6">
-                <div className="w-14 h-14 bg-black rounded-full flex items-center justify-center text-2xl text-[#FF6701] transition-transform duration-300 group-hover:scale-110">
+                <div data-cursor-white className="w-14 h-14 bg-white rounded-full flex items-center justify-center text-2xl text-black transition-transform duration-300 group-hover:scale-110 shrink-0">
                   {services[2].icon}
                 </div>
-                <div className="bg-black/10 px-4 py-2 rounded-full text-black text-xs font-bold tracking-wider uppercase">
-                  {services[2].tag}
+                <div className="text-6xl lg:text-7xl font-bold text-white/30 font-sans tracking-tighter">
+                  {services[2].number}
                 </div>
               </div>
               <div>
-                <h3 className="text-3xl font-bold font-sans text-black mb-3 tracking-tight">
+                <h3 className="text-2xl font-bold font-sans text-black mb-3 tracking-tight">
                   {services[2].title}
                 </h3>
                 <p className="text-neutral-800 text-[0.95rem] leading-relaxed max-w-[260px]">
@@ -152,14 +140,14 @@ export default function ServicesSection() {
             {/* UI/UX Design (Black Style) */}
             <div className="bento-service-card bg-black rounded-[40px] p-8 lg:p-10 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 min-h-[140px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group">
               <div className="flex flex-col order-2 sm:order-1">
-                <div className="bg-white/10 w-fit px-3 py-1 rounded-full text-white/70 text-[0.65rem] font-bold tracking-wider uppercase mb-2">
-                  {services[3].tag}
-                </div>
-                <h3 className="text-2xl lg:text-3xl font-bold font-sans text-white tracking-tight">
+                <h3 className="text-xl lg:text-2xl font-bold font-sans text-white tracking-tight">
                   {services[3].title}
                 </h3>
+                <div className="text-5xl font-bold text-white/10 font-sans tracking-tighter">
+                  {services[3].number}
+                </div>
               </div>
-              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center text-2xl text-white transform transition-transform duration-500 group-hover:scale-110 group-hover:bg-[#FF6701] group-hover:text-black order-1 sm:order-2 shrink-0">
+              <div data-cursor-white className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center text-2xl text-white transform transition-transform duration-500 group-hover:scale-110 group-hover:bg-[#FF6701] group-hover:text-black order-1 sm:order-2 shrink-0">
                 {services[3].icon}
               </div>
             </div>
@@ -171,15 +159,15 @@ export default function ServicesSection() {
             <InteractiveGrid />
             <div className="relative z-10 flex flex-col justify-between h-full">
               <div className="flex justify-between items-start mb-8">
-                <div className="w-16 h-16 bg-[#FF6701] rounded-full flex items-center justify-center text-2xl text-black transition-transform duration-300 group-hover:scale-110">
+                <div data-cursor-white className="w-16 h-16 bg-[#FF6701] rounded-full flex items-center justify-center text-2xl text-black transition-transform duration-300 group-hover:scale-110 shrink-0">
                   {services[1].icon}
                 </div>
-                <div className="bg-white/5 px-4 py-2 rounded-full text-white/60 text-xs font-bold tracking-wider uppercase">
-                  {services[1].tag}
+                <div className="text-7xl lg:text-8xl font-bold text-white/10 font-sans tracking-tighter">
+                  {services[1].number}
                 </div>
               </div>
               <div>
-                <h3 className="text-4xl font-bold font-sans text-white mb-4 tracking-tight">
+                <h3 className="text-3xl font-bold font-sans text-white mb-4 tracking-tight">
                   {services[1].title}
                 </h3>
                 <p className="text-neutral-400 text-[1rem] leading-relaxed">
@@ -193,21 +181,21 @@ export default function ServicesSection() {
           <div className="bento-service-card relative rounded-[48px] overflow-hidden min-h-[400px] lg:min-h-[480px] bg-white flex flex-col justify-between p-4 shadow-sm group border border-neutral-100">
             {/* Background Image / Overlay */}
             <div className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105">
-              <div className="absolute inset-0 bg-white/40 mix-blend-overlay z-10" />
-              <Image src="/projects/dashboard-2.png" alt="Web Design" fill className="object-cover opacity-80" />
+              <div className="absolute inset-0 bg-black/70 z-10" />
+              <Image src="/projects/web-design-bg.png" alt="Web Design" fill className="object-cover opacity-80" />
             </div>
             {/* Top Tag & Icon */}
             <div className="relative z-10 flex justify-between items-center pt-6 px-6">
-              <div className="w-14 h-14 bg-[#1C1C1C] rounded-full flex items-center justify-center text-2xl text-white shadow-lg">
+              <div className="w-14 h-14 bg-[#1C1C1C] rounded-full flex items-center justify-center text-2xl text-white shadow-lg shrink-0">
                 {services[0].icon}
               </div>
-              <div className="bg-[#1C1C1C]/10 backdrop-blur-md px-4 py-2 rounded-full text-black text-xs font-bold tracking-wider uppercase">
-                {services[0].tag}
+              <div className="text-6xl font-bold text-black/10 font-sans tracking-tighter">
+                {services[0].number}
               </div>
             </div>
             {/* Content Box */}
             <div className="relative z-10 bg-[#1C1C1C] rounded-[32px] p-8 pb-10 w-full shadow-xl transform transition-transform duration-500 group-hover:-translate-y-2 border border-white/5">
-              <h3 className="text-3xl font-bold font-sans text-white mb-3 tracking-tight">
+              <h3 className="text-2xl font-bold font-sans text-white mb-3 tracking-tight">
                 {services[0].title}
               </h3>
               <p className="text-neutral-400 text-sm leading-relaxed">

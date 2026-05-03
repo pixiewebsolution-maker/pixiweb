@@ -52,7 +52,7 @@ export default function InteractiveGrid() {
   }, []);
 
   return (
-    <div ref={containerRef} className="absolute inset-0 z-0 overflow-hidden pointer-events-auto opacity-50">
+    <div ref={containerRef} className="absolute inset-0 z-0 overflow-hidden pointer-events-auto opacity-50 hidden md:block">
       <div 
         className="grid w-full h-full pointer-events-none" 
         style={{ 

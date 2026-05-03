@@ -3,11 +3,12 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import ParticlesCanvas from './ParticlesCanvas';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function HeroSection() {
+export default function HeroSection({ isLoaded }: { isLoaded?: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
@@ -17,44 +18,52 @@ export default function HeroSection() {
   const shape2Ref = useRef<HTMLDivElement>(null);
   const shape3Ref = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLAnchorElement>(null);
+  const strikeRef = useRef<HTMLDivElement>(null);
+  const secondLineRef = useRef<HTMLSpanElement>(null);
 
-  useEffect(() => {
-    if (!headlineRef.current) return;
+  useGSAP(() => {
+    if (!isLoaded || !headlineRef.current) return;
 
     // Split text animation
     const words = headlineRef.current.querySelectorAll('.word');
 
-    const tl = gsap.timeline({ delay: 0.2 });
+    const tl = gsap.timeline({ delay: 0.2 }); // 0.2 second delay after preloader completes
 
-    tl.fromTo(
-      words,
-      { y: '110%', opacity: 0 },
-      {
-        y: '0%',
-        opacity: 1,
-        duration: 1,
-        stagger: 0.08,
+    // 1. Reveal main heading lines
+    tl.set(headlineRef.current, { opacity: 1 })
+      .fromTo(
+        words,
+        { y: '110%', opacity: 0 },
+        {
+          y: '0%',
+          opacity: 1,
+          duration: 1,
+          stagger: 0.15,
+          ease: 'power4.out',
+        }
+      )
+      .to(strikeRef.current, {
+        width: '100%',
+        duration: 1.0,
         ease: 'power4.out',
-      }
-    )
-    .fromTo(
-      subRef.current,
-      { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' },
-      '-=0.5'
-    )
-    .fromTo(
-      ctaRef.current,
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-      '-=0.5'
-    )
-    .fromTo(
-      scrollHintRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 1 },
-      '-=0.3'
-    );
+      }, '+=0.2')
+      .to(secondLineRef.current, {
+        color: '#FF6701',
+        duration: 0.6,
+        ease: 'power2.out'
+      }, '<') // Sync with strike
+      .to(subRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out'
+      }, '<') // Start at same time as strike
+      .to(ctaRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out'
+      }, '<'); // Start at same time as strike
 
     // Floating shapes
     if (shape1Ref.current) {
@@ -88,8 +97,7 @@ export default function HeroSection() {
         }
       },
     });
-
-  }, []);
+  }, { dependencies: [isLoaded], scope: sectionRef });
 
   const scrollToSection = (e: React.MouseEvent, href: string) => {
     e.preventDefault();
@@ -133,7 +141,7 @@ export default function HeroSection() {
       />
 
       {/* Abstract floating elements */}
-      <div style={{
+      <div className="hidden md:block" style={{
         position: 'absolute', top: '20%', right: '8%',
         width: '80px', height: '80px',
         border: '1px solid rgba(124,58,237,0.3)',
@@ -143,7 +151,7 @@ export default function HeroSection() {
         transform: 'rotate(15deg)',
         animation: 'float 7s ease-in-out infinite',
       }} />
-      <div style={{
+      <div className="hidden md:block" style={{
         position: 'absolute', bottom: '25%', left: '6%',
         width: '60px', height: '60px',
         borderRadius: '50%',
@@ -151,7 +159,7 @@ export default function HeroSection() {
         background: 'rgba(245,158,11,0.05)',
         animation: 'float-reverse 9s ease-in-out infinite',
       }} />
-      <div style={{
+      <div className="hidden md:block" style={{
         position: 'absolute', top: '55%', right: '15%',
         width: '40px', height: '40px',
         borderRadius: '10px',
@@ -169,17 +177,29 @@ export default function HeroSection() {
         <div
           ref={headlineRef}
           aria-label="We don't build websites. We create experiences."
-          style={{ marginBottom: '32px' }}
+          style={{ marginBottom: '32px', opacity: 0 }}
         >
-          <h1 className="display-xl" style={{ lineHeight: 1.1 }}>
-            <span className="overflow-clip" style={{ display: 'block' }}>
-              <span className="word" style={{ display: 'inline-block' }}>
+          <h1 className="display-xl hero-headline" style={{ lineHeight: 1.1 }}>
+            <span className="overflow-clip" style={{ display: 'block', fontSize: '0.8em', opacity: 0.9 }}>
+              <span className="word" style={{ display: 'inline-block', position: 'relative' }}>
                 We don&apos;t build websites.
+                <span ref={strikeRef} className="strike-line" style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: '55%',
+                  width: 0,
+                  height: '4px',
+                  background: 'var(--color-primary)',
+                  borderRadius: '2px',
+                  opacity: 0.8,
+                  pointerEvents: 'none',
+                  zIndex: 10,
+                }} />
               </span>
             </span>
             <span className="overflow-clip" style={{ display: 'block' }}>
-              <span className="word text-gradient shimmer-text" style={{ display: 'inline-block' }}>
-                We create experiences.
+              <span ref={secondLineRef} className="word" style={{ display: 'inline-block', color: 'var(--color-primary)' }}>
+                &ldquo;We create experiences.&rdquo;
               </span>
             </span>
           </h1>
@@ -194,17 +214,20 @@ export default function HeroSection() {
             fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
             lineHeight: 1.7,
             color: 'var(--color-text-muted)',
+            opacity: 0,
+            transform: 'translateY(40px)',
           }}
         >
           Award-winning digital agency crafting immersive web experiences that convert visitors into loyal customers through motion, design, and innovation.
         </p>
 
         {/* CTAs */}
-        <div ref={ctaRef} style={{ display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '12px' }}>
+        <div ref={ctaRef} style={{ display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '12px', opacity: 0, transform: 'translateY(40px)' }}>
           <a
             ref={btnRef}
             href="#contact"
-            className="btn-primary magnetic-wrapper"
+            data-cursor-white
+            className="btn-primary magnetic-wrapper hero-btn-shadow"
             onClick={(e) => scrollToSection(e, '#contact')}
             style={{ display: 'inline-flex' }}
           >
@@ -213,7 +236,8 @@ export default function HeroSection() {
           </a>
           <a
             href="#work"
-            className="btn-ghost"
+            data-cursor-white
+            className="btn-ghost hero-btn-shadow"
             style={{ 
               background: 'rgba(255,255,255,0.8)',
               backdropFilter: 'blur(10px)',

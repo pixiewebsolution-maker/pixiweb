@@ -34,14 +34,16 @@ export default function Navbar() {
 
   return (
     <nav ref={navRef} className={scrolled ? 'scrolled' : ''}>
-      <div className="container flex items-center justify-between">
+      <div className="container flex items-center justify-between relative min-h-[70px]">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+        <a href="#" className="flex items-center gap-3 absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 z-10" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
           <Image src="/pixie-logo.png" alt="Pixie Webs" width={56} height={56} className="rounded-lg" style={{ mixBlendMode: 'multiply' }} />
           <span style={{
-            fontFamily: 'var(--font-sans)',
+            fontFamily: 'var(--font-serif)',
             fontWeight: 700,
-            fontSize: '1.15rem',
+            fontSize: '1rem',
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
             background: 'var(--color-primary)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
@@ -51,7 +53,6 @@ export default function Navbar() {
           </span>
         </a>
 
-        {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
           {links.map((l) => (
             <a
@@ -63,20 +64,15 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
+          <a href="#contact" className="btn-primary" style={{ padding: '12px 24px', fontSize: '0.9rem' }} onClick={(e) => scrollTo(e, '#contact')}>
+            <span>Start a Project</span>
+          </a>
         </div>
 
-        {/* CTA */}
-        <a
-          href="#contact"
-          className="hidden md:flex btn-primary text-sm py-3 px-6"
-          onClick={(e) => scrollTo(e, '#contact')}
-        >
-          <span>Start a Project</span>
-        </a>
 
-        {/* Mobile Hamburger */}
+
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="flex flex-col gap-1.5 p-2 md:hidden ml-auto z-10"
           onClick={() => setMenuOpen(!menuOpen)}
           style={{ cursor: 'none', background: 'none', border: 'none' }}
           aria-label="Menu"
@@ -102,31 +98,43 @@ export default function Navbar() {
       {menuOpen && (
         <div style={{
           position: 'absolute',
-          top: '100%',
+          top: 'calc(100% + 10px)',
           left: 0,
           right: 0,
-          background: 'rgba(3, 1, 10, 0.95)',
+          background: 'rgba(255, 255, 255, 0.95)',
           backdropFilter: 'blur(24px)',
-          borderBottom: '1px solid var(--color-border)',
-          padding: '20px',
+          WebkitBackdropFilter: 'blur(24px)',
+          border: '1px solid var(--color-border)',
+          borderRadius: '32px',
+          padding: '24px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '16px',
+          gap: '12px',
+          boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+          animation: 'mobileMenuIn 0.4s cubic-bezier(0.23, 1, 0.32, 1)',
         }}>
           {links.map((l) => (
             <a
               key={l.label}
               href={l.href}
               className="nav-link"
-              style={{ fontSize: '1.1rem', padding: '8px 0' }}
+              style={{ fontSize: '1rem', padding: '12px 16px', borderRadius: '12px', border: '1px solid transparent' }}
               onClick={(e) => scrollTo(e, l.href)}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.03)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
             >
               {l.label}
             </a>
           ))}
-          <a href="#contact" className="btn-primary mt-2" style={{ justifyContent: 'center' }} onClick={(e) => scrollTo(e, '#contact')}>
+          <a href="#contact" className="btn-primary mt-4" style={{ justifyContent: 'center', width: '100%' }} onClick={(e) => scrollTo(e, '#contact')}>
             <span>Start a Project</span>
           </a>
+          <style>{`
+            @keyframes mobileMenuIn {
+              from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+              to { opacity: 1; transform: translateY(0) scale(1); }
+            }
+          `}</style>
         </div>
       )}
     </nav>

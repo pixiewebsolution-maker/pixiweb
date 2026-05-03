@@ -33,7 +33,7 @@ export default function ParticlesCanvas() {
 
     const colors = [
       'rgba(0, 0, 0,', // black
-      'rgba(197, 245, 66,', // lime
+      'rgba(255, 103, 1,', // orange
       'rgba(50, 50, 50,', // dark gray
       'rgba(150, 150, 150,', // gray
     ];

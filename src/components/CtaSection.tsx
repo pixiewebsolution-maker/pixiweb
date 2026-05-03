@@ -71,7 +71,7 @@ export default function CtaSection() {
           top: '50%', left: '50%',
           transform: 'translate(-50%, -50%)',
           width: '700px', height: '700px',
-          background: 'radial-gradient(circle, rgba(197, 245, 66, 0.2) 0%, rgba(0, 0, 0, 0.05) 50%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255, 103, 1, 0.2) 0%, rgba(0, 0, 0, 0.05) 50%, transparent 70%)',
           borderRadius: '50%',
           filter: 'blur(40px)',
           pointerEvents: 'none',
@@ -95,7 +95,7 @@ export default function CtaSection() {
       <div style={{
         position: 'absolute', bottom: '20%', right: '8%',
         width: '60px', height: '60px',
-        border: '1px solid rgba(197, 245, 66, 0.5)',
+        border: '1px solid rgba(255, 103, 1, 0.5)',
         borderRadius: '50%',
         animation: 'float-reverse 6s ease-in-out infinite',
       }} />
@@ -135,11 +135,11 @@ export default function CtaSection() {
             <span>✉ hello@pixiewebs.com</span>
           </a>
           <a
-            href="tel:+91887777807"
+            href="tel:+919188777807"
             className="btn-ghost"
             style={{ fontSize: '1.05rem', padding: '17px 40px' }}
           >
-            📞 +91 88777 7807
+            📞 +91 9188777807
           </a>
         </div>
 

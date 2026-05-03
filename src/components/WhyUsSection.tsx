@@ -230,7 +230,7 @@ export default function WhyUsSection() {
               </div>
               <div className="flex items-center gap-3 text-[#FF6701] text-sm font-bold tracking-wider uppercase cursor-pointer hover:opacity-80 transition-opacity pb-2">
                 SEE BREAKDOWN
-                <div className="w-10 h-10 bg-[#FF6701] rounded-full flex items-center justify-center text-black transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                <div data-cursor-white className="w-10 h-10 bg-[#FF6701] rounded-full flex items-center justify-center text-black transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
                   <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M5 19L19 5m0 0v10m0-10H9" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </div>
               </div>
@@ -241,10 +241,12 @@ export default function WhyUsSection() {
           <div className="flex flex-col gap-6">
             
             {/* Card 2: Orange */}
-            <div className="bento-card bg-[#FF6701] rounded-[40px] p-8 lg:p-10 shadow-sm flex-1 flex flex-col justify-between relative group hover:shadow-xl hover:-translate-y-1 transition-all duration-500 min-h-[150px]">
-              <div className="flex justify-between items-start mb-4 text-black">
-                <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2m8-14a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm8 6a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                <span className="text-xs font-medium opacity-50 font-sans tracking-widest">01</span>
+            <div data-cursor-white className="bento-card bg-[#FF6701] rounded-[40px] p-8 lg:p-10 shadow-sm flex-1 flex flex-col justify-between relative group hover:shadow-xl hover:-translate-y-1 transition-all duration-500 min-h-[150px]">
+              <div className="flex justify-between items-center mb-6 text-black">
+                <div className="w-12 h-12 bg-black/10 rounded-2xl flex items-center justify-center">
+                  <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                </div>
+                <span className="text-6xl font-bold opacity-20 font-sans tracking-tighter">01</span>
               </div>
               <div>
                 <div className="text-4xl lg:text-5xl font-bold font-sans text-black mb-1 tracking-tight">
@@ -259,9 +261,11 @@ export default function WhyUsSection() {
 
             {/* Card 3: White (Was Cyan/Blue) */}
             <div className="bento-card bg-white rounded-[40px] p-8 lg:p-10 shadow-sm flex-1 flex flex-col justify-between relative group hover:shadow-xl hover:-translate-y-1 transition-all duration-500 min-h-[150px]">
-              <div className="flex justify-between items-start mb-4 text-black">
-                <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM2 12c2-4.5 5.5-8 10-8s8 3.5 10 8-5.5 8-10 8-8-3.5-10-8z" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                <span className="text-xs font-medium opacity-70 font-sans tracking-widest">02</span>
+              <div className="flex justify-between items-center mb-6 text-black">
+                <div className="w-12 h-12 bg-black/5 rounded-2xl flex items-center justify-center">
+                  <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                </div>
+                <span className="text-6xl font-bold opacity-10 font-sans tracking-tighter">02</span>
               </div>
               <div>
                 <div className="text-4xl lg:text-5xl font-bold font-sans text-black mb-1 tracking-tight">
@@ -276,9 +280,11 @@ export default function WhyUsSection() {
 
             {/* Card 4: Satin Grey (Was White) */}
             <div className="bento-card bg-[#1C1C1C] rounded-[40px] p-8 lg:p-10 shadow-sm flex-1 flex flex-col justify-between relative group hover:shadow-xl hover:-translate-y-1 transition-all duration-500 min-h-[150px] border border-white/5">
-              <div className="flex justify-between items-start mb-4 text-white">
-                <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5zm0 0v8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                <span className="text-xs font-medium opacity-40 font-sans tracking-widest">03</span>
+              <div className="flex justify-between items-center mb-6 text-white">
+                <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center">
+                  <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                </div>
+                <span className="text-6xl font-bold opacity-10 font-sans tracking-tighter">03</span>
               </div>
               <div>
                 <div className="text-4xl lg:text-5xl font-bold font-sans text-white mb-1 tracking-tight">

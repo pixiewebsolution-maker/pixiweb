@@ -73,6 +73,8 @@ export default function CustomCursor() {
     const handleLeave = () => document.body.classList.remove('cursor-hover');
     const handleDown = () => document.body.classList.add('cursor-click');
     const handleUp = () => document.body.classList.remove('cursor-click');
+    const handleWhiteEnter = () => document.body.classList.add('cursor-white');
+    const handleWhiteLeave = () => document.body.classList.remove('cursor-white');
 
     window.addEventListener('mousemove', moveCursor);
     window.addEventListener('mousedown', handleDown);
@@ -84,6 +86,12 @@ export default function CustomCursor() {
       el.addEventListener('mouseleave', handleLeave);
     });
 
+    const whiteInteractables = document.querySelectorAll('[data-cursor-white], .btn-primary, .btn-ghost');
+    whiteInteractables.forEach((el) => {
+      el.addEventListener('mouseenter', handleWhiteEnter);
+      el.addEventListener('mouseleave', handleWhiteLeave);
+    });
+
     // Observe DOM changes to catch dynamically added elements
     const observer = new MutationObserver(() => {
       const els = document.querySelectorAll('a, button, [data-cursor-hover]');
@@ -92,6 +100,14 @@ export default function CustomCursor() {
         el.removeEventListener('mouseleave', handleLeave);
         el.addEventListener('mouseenter', handleEnter);
         el.addEventListener('mouseleave', handleLeave);
+      });
+
+      const wEls = document.querySelectorAll('[data-cursor-white], .btn-primary, .btn-ghost');
+      wEls.forEach((el) => {
+        el.removeEventListener('mouseenter', handleWhiteEnter);
+        el.removeEventListener('mouseleave', handleWhiteLeave);
+        el.addEventListener('mouseenter', handleWhiteEnter);
+        el.addEventListener('mouseleave', handleWhiteLeave);
       });
     });
     observer.observe(document.body, { childList: true, subtree: true });

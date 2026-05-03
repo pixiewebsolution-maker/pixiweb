@@ -17,7 +17,7 @@ const socials = [
 const footerLinks = {
   Services: ['Web Design', 'Development', 'Branding', 'UI/UX Design', 'SEO & Growth'],
   Company: ['About Us', 'Our Work', 'Case Studies', 'Blog', 'Careers'],
-  Contact: ['hello@pixiewebs.com', '+91 88777 7807', 'Kochi, Kerala, India'],
+  Contact: ['hello@pixiewebs.com', '+91 9188777807', 'Kochi, Kerala, India'],
 };
 
 export default function Footer() {
@@ -55,7 +55,7 @@ export default function Footer() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
               <Image src="/pixie-logo.png" alt="Pixie Webs" width={64} height={64} style={{ mixBlendMode: 'multiply' }} />
               <span style={{
-                fontFamily: 'var(--font-sans)',
+                fontFamily: 'var(--font-serif)',
                 fontWeight: 700,
                 fontSize: '1.1rem',
                 color: 'var(--color-text)',
@@ -168,11 +168,7 @@ export default function Footer() {
           fontSize: '0.82rem',
         }}>
           <span>© 2025 Pixie Webs. All rights reserved.</span>
-          <span style={{ color: 'var(--color-text-muted)' }}>
-            Made with{' '}
-            <span style={{ color: '#ef4444' }}>♥</span>
-            {' '}in Kochi, India
-          </span>
+
           <div style={{ display: 'flex', gap: '24px' }}>
             <a href="#" style={{ color: 'inherit', textDecoration: 'none', cursor: 'none', transition: 'color 0.3s' }}
               onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-text)'}
