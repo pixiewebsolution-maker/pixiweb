@@ -198,7 +198,7 @@ export default function WhyUsSection() {
         </div>
 
         {/* Bento Box Stats Layout */}
-        <div ref={statsRef} className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6 mb-24">
+        <div ref={statsRef} className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-4 lg:gap-6 mb-16 lg:mb-24">
           
           {/* Card 1: Left Large (Black with Grid & Glow) */}
           <div className="bento-card relative rounded-[48px] overflow-hidden min-h-[400px] lg:min-h-[500px] bg-[#1C1C1C] flex flex-col justify-between p-10 lg:p-12 shadow-xl group">
@@ -301,7 +301,7 @@ export default function WhyUsSection() {
         </div>
 
         {/* Reasons Heading */}
-        <div ref={reasonsHeadRef} className="mt-32 mb-16 text-center lg:text-left flex flex-col lg:flex-row justify-between items-end gap-6">
+        <div ref={reasonsHeadRef} className="mt-16 lg:mt-32 mb-12 lg:mb-16 text-center lg:text-left flex flex-col lg:flex-row justify-between items-end gap-6">
           <div className="max-w-xl">
             <h2 className="text-4xl lg:text-5xl font-bold font-sans text-black tracking-tight mb-4">
               Built on <span className="text-neutral-400 shimmer-text">Excellence</span>
@@ -315,7 +315,7 @@ export default function WhyUsSection() {
         {/* Modern Reasons Grid */}
         <div
           ref={reasonsRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6"
         >
           {reasons.map((r, i) => (
             <div

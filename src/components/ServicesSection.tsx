@@ -16,6 +16,7 @@ const services = [
     number: '01',
     color: '#FF6701',
     textColor: 'black',
+    className: 'md:col-span-1 md:row-span-2',
   },
   {
     icon: <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>,
@@ -24,6 +25,7 @@ const services = [
     number: '02',
     color: '#1C1C1C',
     textColor: 'white',
+    className: 'md:col-span-2 md:row-span-1',
   },
   {
     icon: <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm1.063-17.974L4.026 12.063 12.063 20.1l8.037-8.037-7.037-7.037z"/></svg>,
@@ -32,6 +34,7 @@ const services = [
     number: '03',
     color: 'black',
     textColor: 'white',
+    className: 'md:col-span-1 md:row-span-1',
   },
   {
     icon: <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-4c-.83 0-1.5-.67-1.5-1.5S8.67 5 9.5 5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>,
@@ -39,8 +42,9 @@ const services = [
     description: 'Award-winning designs that captivate, convert, and create lasting impressions.',
     number: '04',
     color: 'white',
-    textColor: 'black',
-    bgImage: '/projects/dashboard-1.png'
+    textColor: 'white',
+    bgImage: '/projects/dashboard-1.png',
+    className: 'md:col-span-1 md:row-span-2',
   },
   {
     icon: <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>,
@@ -49,6 +53,7 @@ const services = [
     number: '05',
     color: '#FF6701',
     textColor: 'black',
+    className: 'md:col-span-2 md:row-span-1',
   },
   {
     icon: <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>,
@@ -57,6 +62,7 @@ const services = [
     number: '06',
     color: 'black',
     textColor: 'white',
+    className: 'md:col-span-3 md:row-span-1',
   },
 ];
 
@@ -116,12 +122,12 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 md:auto-rows-[220px]">
           {services.map((s, i) => (
             <div 
               key={i}
               data-cursor-white={s.textColor === 'white'}
-              className={`bento-service-card relative rounded-[40px] p-8 lg:p-10 shadow-sm flex flex-col justify-between min-h-[300px] transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group overflow-hidden border border-white/5 ${s.color === 'white' ? 'bg-white' : ''}`}
+              className={`bento-service-card relative rounded-[40px] p-6 lg:p-8 shadow-sm flex flex-col justify-between min-h-[200px] transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group overflow-hidden border border-white/5 ${s.color === 'white' ? 'bg-white' : ''} md:${s.className?.replace('md:', '') || ''}`}
               style={{ backgroundColor: s.bgImage ? undefined : s.color }}
             >
               {s.bgImage && (
@@ -135,14 +141,14 @@ export default function ServicesSection() {
 
               <div className="relative z-10 flex justify-between items-start mb-6">
                 <div 
-                  className={`w-14 h-14 rounded-full flex items-center justify-center text-2xl transition-transform duration-300 group-hover:scale-110 shrink-0 ${
+                  className={`w-12 h-12 rounded-full flex items-center justify-center text-xl transition-transform duration-300 group-hover:scale-110 shrink-0 ${
                     s.textColor === 'black' ? 'bg-black text-white' : 'bg-white text-black'
                   }`}
                 >
                   {s.icon}
                 </div>
                 <div 
-                  className={`text-6xl lg:text-7xl font-bold font-sans tracking-tighter ${
+                  className={`text-5xl lg:text-6xl font-bold font-sans tracking-tighter ${
                     s.textColor === 'black' ? 'text-black/10' : 'text-white/10'
                   }`}
                 >

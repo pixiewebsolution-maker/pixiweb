@@ -36,21 +36,8 @@ export default function Navbar() {
     <nav ref={navRef} className={scrolled ? 'scrolled' : ''}>
       <div className="container flex items-center justify-between relative min-h-[70px]">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3 absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 z-10" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-          <Image src="/pixie-logo.png" alt="Pixie Webs" width={56} height={56} className="rounded-lg" style={{ mixBlendMode: 'multiply' }} />
-          <span style={{
-            fontFamily: 'var(--font-serif)',
-            fontWeight: 700,
-            fontSize: '1rem',
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            background: 'var(--color-primary)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}>
-            Pixie Webs
-          </span>
+        <a href="#" className="z-10" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+          <Image src="/pixie-logo.png" alt="Pixie Webs" width={120} height={40} className="object-contain" style={{ mixBlendMode: 'multiply' }} />
         </a>
 
         <div className="hidden md:flex items-center gap-8">

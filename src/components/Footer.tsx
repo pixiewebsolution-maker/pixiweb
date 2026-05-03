@@ -8,10 +8,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const socials = [
-  { name: 'Twitter / X', icon: 'X', href: '#' },
-  { name: 'Instagram', icon: 'IG', href: '#' },
-  { name: 'LinkedIn', icon: 'LI', href: '#' },
-  { name: 'Dribbble', icon: 'DR', href: '#' },
+  { 
+    name: 'Instagram', 
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </svg>
+    ), 
+    href: 'https://instagram.com' 
+  },
 ];
 
 const footerLinks = {
@@ -52,16 +59,8 @@ export default function Footer() {
         className="footer-grid">
           {/* Brand */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-              <Image src="/pixie-logo.png" alt="Pixie Webs" width={64} height={64} style={{ mixBlendMode: 'multiply' }} />
-              <span style={{
-                fontFamily: 'var(--font-serif)',
-                fontWeight: 700,
-                fontSize: '1.1rem',
-                color: 'var(--color-text)',
-              }}>
-                Pixie Webs
-              </span>
+            <div style={{ marginBottom: '20px' }}>
+              <Image src="/pixie-logo.png" alt="Pixie Webs" width={140} height={50} style={{ mixBlendMode: 'multiply', objectFit: 'contain' }} />
             </div>
             <p style={{
               color: 'var(--color-text-muted)',

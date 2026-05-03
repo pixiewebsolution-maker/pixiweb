@@ -106,7 +106,7 @@ export default function ProcessSection() {
         </div>
 
         {/* Bento Grid Layout */}
-        <div ref={gridRef} className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
+        <div ref={gridRef} className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 relative z-10">
           
           {/* Card 1: Left Tall (White Style - Was Blue Image) */}
           <div className="bento-process-card relative rounded-[48px] overflow-hidden min-h-[400px] lg:min-h-[480px] bg-white flex flex-col justify-between p-4 shadow-sm group">

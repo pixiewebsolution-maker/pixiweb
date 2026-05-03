@@ -626,6 +626,14 @@ nav.scrolled {
   padding-bottom: 80px;
 }
 
+.hero-cta-row {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
 /* ============================================
    SERVICES CARDS
    ============================================ */
@@ -762,7 +770,7 @@ footer .nav-link:hover {
 }
 
 /* ============================================
-   RESPONSIVE
+   RESPONSIVE — Mobile First
    ============================================ */
 @media (max-width: 768px) {
   body {
@@ -781,12 +789,107 @@ footer .nav-link:hover {
     min-width: 280px;
     padding: 40px 32px;
   }
+
+  /* Hero */
+  .hero-section {
+    padding-top: 130px;
+    padding-bottom: 60px;
+    min-height: 100svh;
+    align-items: flex-start;
+  }
+
+  .display-xl {
+    font-size: clamp(2.2rem, 10vw, 3.5rem);
+    line-height: 1.08;
+  }
+
+  .display-lg {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+
+  .display-md {
+    font-size: clamp(1.6rem, 7vw, 2.4rem);
+  }
+
+  /* Buttons — stack vertically on mobile */
+  .hero-cta-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .btn-primary, .btn-ghost {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+    padding: 15px 28px;
+    font-size: 0.95rem;
+  }
+
+  /* Sections */
+  .section-pad {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
 }
 
 @media (max-width: 640px) {
   :root {
-    --section-pad: 80px;
+    --section-pad: 64px;
   }
+
+  /* Navbar */
+  nav {
+    top: 12px;
+    width: 94%;
+    padding: 8px 16px;
+  }
+
+  /* Hero text padding */
+  .hero-section .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* Services bento — all single column on mobile */
+  .bento-service-card {
+    border-radius: 28px !important;
+    padding: 24px !important;
+  }
+
+  /* Process bento */
+  .bento-process-card {
+    border-radius: 28px !important;
+    min-height: 260px !important;
+  }
+
+  /* Why Us bento */
+  .bento-card {
+    border-radius: 32px !important;
+  }
+
+  /* Glass/reason cards */
+  .reason-card {
+    border-radius: 28px !important;
+    padding: 28px !important;
+  }
+
+  /* CTA section buttons */
+  #contact .container > div[style*="flex"] {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #contact .btn-primary,
+  #contact .btn-ghost {
+    width: 100%;
+    max-width: 340px;
+    justify-content: center;
+    font-size: 0.9rem;
+    padding: 15px 24px !important;
+  }
+
+  /* Footer grid already handled inline */
 }
 
 /* ============================================

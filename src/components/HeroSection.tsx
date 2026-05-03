@@ -24,76 +24,101 @@ export default function HeroSection({ isLoaded }: { isLoaded?: boolean }) {
   useGSAP(() => {
     if (!isLoaded || !headlineRef.current) return;
 
-    // Split text animation
     const words = headlineRef.current.querySelectorAll('.word');
 
-    const tl = gsap.timeline({ delay: 0.2 }); // 0.2 second delay after preloader completes
+    // Set initial states
+    gsap.set(headlineRef.current, { opacity: 1 });
+    gsap.set(words, { y: '120%', opacity: 0, filter: 'blur(12px)', rotationX: -20 });
+    gsap.set(subRef.current, { opacity: 0, y: 36, filter: 'blur(6px)' });
+    gsap.set(ctaRef.current, { opacity: 0, y: 28, filter: 'blur(4px)' });
+    gsap.set(scrollHintRef.current, { opacity: 0, y: 10 });
 
-    // 1. Reveal main heading lines
-    tl.set(headlineRef.current, { opacity: 1 })
-      .fromTo(
-        words,
-        { y: '110%', opacity: 0 },
-        {
-          y: '0%',
-          opacity: 1,
-          duration: 1,
-          stagger: 0.15,
-          ease: 'power4.out',
-        }
-      )
-      .to(strikeRef.current, {
-        width: '100%',
-        duration: 1.0,
-        ease: 'power4.out',
-      }, '+=0.2')
-      .to(secondLineRef.current, {
-        color: '#FFFFFF',
-        duration: 0.2,
-        ease: 'none'
-      }, '<') // Sync with strike
-      .to(subRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out'
-      }, '<') // Start at same time as strike
-      .to(ctaRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out'
-      }, '<'); // Start at same time as strike
+    const tl = gsap.timeline({ delay: 0.3 });
 
-    // Floating shapes
+    // 1. Elegant word reveal — each word sweeps up from below with blur clearing
+    tl.to(words, {
+      y: '0%',
+      opacity: 1,
+      filter: 'blur(0px)',
+      rotationX: 0,
+      duration: 1.2,
+      stagger: 0.18,
+      ease: 'expo.out',
+      transformOrigin: 'bottom center',
+    })
+
+    // 2. Strike-through draws across the first line — smooth left-to-right
+    .to(strikeRef.current, {
+      width: '100%',
+      duration: 0.9,
+      ease: 'expo.inOut',
+    }, '-=0.1')
+
+    // 3. Once strike is done, shift 'We create experiences.' to orange
+    .to(secondLineRef.current, {
+      color: '#FF6701',
+      duration: 0.6,
+      ease: 'power2.out',
+    })
+
+    // 4. Subtitle fades up with blur clearing
+    .to(subRef.current, {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      duration: 1.0,
+      ease: 'expo.out',
+    }, '-=0.3')
+
+    // 4. CTA buttons fade up slightly behind subtitle for a cascading feel
+    .to(ctaRef.current, {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      duration: 0.9,
+      ease: 'expo.out',
+    }, '-=0.6')
+
+    // 5. Scroll hint fades in last
+    .to(scrollHintRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power2.out',
+    }, '-=0.3');
+
+    // Floating gradient orbs — slow, organic drift
     if (shape1Ref.current) {
       gsap.to(shape1Ref.current, {
-        y: -40, x: 20, rotation: 15,
-        duration: 6, repeat: -1, yoyo: true, ease: 'sine.inOut'
+        y: -60, x: 30, rotation: 12,
+        duration: 10, repeat: -1, yoyo: true, ease: 'sine.inOut',
       });
     }
     if (shape2Ref.current) {
       gsap.to(shape2Ref.current, {
-        y: 50, x: -30, rotation: -20,
-        duration: 8, repeat: -1, yoyo: true, ease: 'sine.inOut'
+        y: 70, x: -40, rotation: -18,
+        duration: 13, repeat: -1, yoyo: true, ease: 'sine.inOut',
       });
     }
     if (shape3Ref.current) {
       gsap.to(shape3Ref.current, {
-        y: -30, x: -20, rotation: 10,
-        duration: 7, repeat: -1, yoyo: true, ease: 'sine.inOut'
+        y: -45, x: -25, rotation: 8,
+        duration: 11, repeat: -1, yoyo: true, ease: 'sine.inOut',
       });
     }
 
-    // Parallax on scroll
+    // Smooth scrub parallax on scroll
     ScrollTrigger.create({
       trigger: sectionRef.current,
       start: 'top top',
       end: 'bottom top',
-      scrub: true,
+      scrub: 1.2,
       onUpdate: (self) => {
         if (headlineRef.current) {
-          gsap.set(headlineRef.current, { y: self.progress * 120 });
+          gsap.set(headlineRef.current, { y: self.progress * 100, opacity: 1 - self.progress * 0.6 });
+        }
+        if (subRef.current) {
+          gsap.set(subRef.current, { y: self.progress * 60 });
         }
       },
     });
@@ -176,13 +201,13 @@ export default function HeroSection({ isLoaded }: { isLoaded?: boolean }) {
         {/* Headline */}
         <div
           ref={headlineRef}
-          aria-label="We don't build websites. We create experiences."
+          aria-label="We build websites. We create experiences."
           style={{ marginBottom: '32px', opacity: 0 }}
         >
           <h1 className="display-xl hero-headline" style={{ lineHeight: 1.1 }}>
             <span className="overflow-clip" style={{ display: 'block', fontSize: '0.8em', opacity: 0.9 }}>
-              <span className="word" style={{ display: 'inline-block', position: 'relative' }}>
-                We don&apos;t build websites.
+              <span className="word" style={{ display: 'inline-block', position: 'relative', fontStyle: 'italic', fontWeight: 400 }}>
+                We build websites.
                 <span ref={strikeRef} className="strike-line" style={{
                   position: 'absolute',
                   left: 0,
@@ -198,8 +223,8 @@ export default function HeroSection({ isLoaded }: { isLoaded?: boolean }) {
               </span>
             </span>
             <span className="overflow-clip" style={{ display: 'block' }}>
-              <span ref={secondLineRef} className="word" style={{ display: 'inline-block', color: 'var(--color-primary)' }}>
-                &ldquo;We create experiences.&rdquo;
+              <span ref={secondLineRef} className="word" style={{ display: 'inline-block', color: 'var(--color-primary)', fontStyle: 'italic', fontWeight: 400 }}>
+                We create experiences.
               </span>
             </span>
           </h1>
@@ -222,7 +247,7 @@ export default function HeroSection({ isLoaded }: { isLoaded?: boolean }) {
         </p>
 
         {/* CTAs */}
-        <div ref={ctaRef} style={{ display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '12px', opacity: 0, transform: 'translateY(40px)' }}>
+        <div ref={ctaRef} className="hero-cta-row" style={{ opacity: 0, transform: 'translateY(40px)' }}>
           <a
             ref={btnRef}
             href="#contact"
