@@ -48,9 +48,9 @@ export default function HeroSection({ isLoaded }: { isLoaded?: boolean }) {
         ease: 'power4.out',
       }, '+=0.2')
       .to(secondLineRef.current, {
-        color: '#FF6701',
-        duration: 0.6,
-        ease: 'power2.out'
+        color: '#FFFFFF',
+        duration: 0.2,
+        ease: 'none'
       }, '<') // Sync with strike
       .to(subRef.current, {
         opacity: 1,
