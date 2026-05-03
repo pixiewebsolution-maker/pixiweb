@@ -36,8 +36,19 @@ export default function Navbar() {
     <nav ref={navRef} className={scrolled ? 'scrolled' : ''}>
       <div className="container flex items-center justify-between relative min-h-[50px]">
         {/* Logo */}
-        <a href="#" className="z-10" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-          <Image src="/pixie-logo.png" alt="Pixie Webs" width={100} height={32} className="object-contain" style={{ mixBlendMode: 'multiply' }} />
+        <a href="#" className="flex items-center gap-3 z-10" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+          <Image src="/pixie-logo.png" alt="Pixie Webs Icon" width={36} height={36} className="object-contain rounded-lg" style={{ mixBlendMode: 'multiply' }} />
+          <span style={{
+            fontFamily: 'var(--font-serif)',
+            fontWeight: 800,
+            fontSize: '0.95rem',
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            color: '#000',
+            paddingTop: '2px'
+          }}>
+            Pixie Webs
+          </span>
         </a>
 
         <div className="hidden md:flex items-center gap-8">
@@ -51,8 +62,9 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
-          <a href="#contact" className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.85rem' }} onClick={(e) => scrollTo(e, '#contact')}>
+          <a href="#contact" className="btn-primary group" style={{ padding: '8px 20px', fontSize: '0.85rem' }} onClick={(e) => scrollTo(e, '#contact')}>
             <span>Start a Project</span>
+            <span className="w-2 h-2 rounded-full bg-[var(--color-primary)] ml-1 transition-transform group-hover:scale-125"></span>
           </a>
         </div>
 
