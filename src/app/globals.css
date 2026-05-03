@@ -793,8 +793,8 @@ footer .nav-link:hover {
   /* Hero */
   .hero-section {
     padding-top: 130px;
-    padding-bottom: 60px;
-    min-height: 100svh;
+    padding-bottom: 160px;
+    min-height: auto;
     align-items: flex-start;
   }
 
