@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Pixie Webs — Websites That Work. Magic That Connects.",
+  title: "Pixie Webs - Websites That Work. Magic That Connects.",
   description:
     "Award-winning digital agency crafting immersive web experiences, stunning UI/UX, and high-performance digital solutions that convert visitors into customers.",
   keywords: "digital agency, web design, web development, UI/UX, branding, Pixie Webs",
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     apple: '/pixie-logo.png?v=2',
   },
   openGraph: {
-    title: "Pixie Webs — We Build Experiences",
+    title: "Pixie Webs - We Build Experiences",
     description:
       "Premium digital agency delivering world-class websites and digital experiences.",
     type: "website",

@@ -169,7 +169,7 @@ export default function Footer() {
           <span>© 2025 Pixie Webs. All rights reserved.</span>
 
           <div style={{ display: 'flex', gap: '24px' }}>
-            <a href="#" style={{ color: 'inherit', textDecoration: 'none', cursor: 'none', transition: 'color 0.3s' }}
+            <a href="/privacy-policy" style={{ color: 'inherit', textDecoration: 'none', cursor: 'none', transition: 'color 0.3s' }}
               onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-text)'}
               onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-dim)'}>
               Privacy Policy

@@ -6,7 +6,7 @@
    ============================================ */
 :root {
   /* Colors */
-  --color-bg: #B8B8BA;
+  --color-bg: #FFFFFF;
   --color-bg-2: #FFFFFF;
   --color-surface: #D8D8DA;
   --color-surface-2: #FFFFFF;
@@ -17,8 +17,8 @@
   --color-primary: #000000;
   --color-primary-light: #222222;
   --color-primary-glow: rgba(0, 0, 0, 0.1);
-  --color-accent: #FF6701;
-  --color-accent-light: #FF8A3D;
+  --color-accent: #fe8b3e;
+  --color-accent-light: #f89b5d;
   --color-accent-glow: rgba(255, 103, 1, 0.4);
 
   /* Text */

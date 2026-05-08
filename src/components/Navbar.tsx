@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
 import gsap from 'gsap';
 
 const links = [
@@ -14,6 +15,8 @@ const links = [
 
 export default function Navbar() {
   const navRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -25,6 +28,10 @@ export default function Navbar() {
 
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    if (pathname !== '/') {
+      router.push('/' + href);
+      return;
+    }
     const el = document.querySelector(href);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -36,7 +43,14 @@ export default function Navbar() {
     <nav ref={navRef} className={scrolled ? 'scrolled' : ''}>
       <div className="container flex items-center justify-between relative min-h-[50px]">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3 z-10" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+        <a href="/" className="flex items-center gap-3 z-10" onClick={(e) => { 
+          e.preventDefault(); 
+          if (pathname === '/') {
+            window.scrollTo({ top: 0, behavior: 'smooth' }); 
+          } else {
+            router.push('/');
+          }
+        }}>
           <Image src="/pixie-logo.png" alt="Pixie Webs Icon" width={36} height={36} className="object-contain rounded-lg" style={{ mixBlendMode: 'multiply' }} />
           <span style={{
             fontFamily: 'var(--font-serif)',
